@@ -1,0 +1,27 @@
+.each-school{
+    display: flex;
+    flex-direction: row;
+    height: min-content;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 3em;
+    background: linear-gradient(to left, rgb(156, 108, 19),rgb(245, 162, 7));
+    border-radius: 10px;
+    padding: 10px 0 10px 0;
+    text-decoration: none;
+    color: rgba(255,255,255);
+}
+.each-school__image{
+    width : 200px;
+    object-fit: cover;
+}
+.each-school__description{
+    display: flex;
+    flex-direction: column;
+}
+@media screen and (min-width : 800px){
+    .each-school{
+        width: 70%;
+    }
+}
