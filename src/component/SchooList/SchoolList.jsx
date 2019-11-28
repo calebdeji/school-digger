@@ -1,48 +1,76 @@
-import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom';
-import dummyImage from '../../logo.png';
-import axios from 'axios';
-import './SchoolList.css';
+import React, { Component, Fragment } from "react";
+import { Link} from "react-router-dom";
+import SchoolTemplate from "./SchoolTemplate";
+import * as localforage from 'localforage';  
+import axios from "axios";
+import "./SchoolList.css";
 
-export default class SchoolList extends Component{
-    constructor(props){
+export default class SchoolList extends Component {
+    constructor(props) {
         super(props);
         this.props = props;
-        this.state = {apiResponse : []}
+        this.state = { apiResponse: [] };
     }
 
-    componentDidMount(){
-        const options = {
-            url : `https://api.schooldigger.com/v1.2/schools?st=CA&appID=${process.env.REACT_APP_AppID}&appKey=${process.env.REACT_APP_APIKey}`,
-            method : 'GET',
-            header : {
-                accept : 'application/json'
-            }
-        }
-        axios(options).then((response)=>{
-            this.setState({apiResponse : response.data.schoolList});
-            console.log("state : ",response);
-        }).catch((err)=>{
-            console.log("error : ", err, "api : ", process.env.APIKey);
+    componentDidMount() {
+
+        localforage.config({
+            driver      : localforage.LOCALSTORAGE, // Force WebSQL; same as using setDriver()
+            name        : 'School Digger',
+            version     : 1.0,
+            storeName   : 'keyvaluepairs', // Should be alphanumeric, with underscores.
+            description : 'Used to store the data fetched from school digger api'
         });
-    }
-    render(){
-        return(
-            <Fragment>
-                {
-                    this.state.apiResponse.map((item,index)=>{
-                        return(
-                            <Link to= '' key={item.schoollid} className="each-school">
-                                <img src={dummyImage} alt="A dummy figure" className="each-school__image"/>
-                                <div className="each-school__description">
-                                    <p className="each-school__name"> { item.schoolName } </p>
-                                    <p className="each-school__address"> { item.address.html } </p>
-                                    <p className="each-school__level"> { item.schoolLevel } Level</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                </div>
-                            </Link>
-                        );
+
+        localforage.getItem('api_response').then((value)=>{
+            console.log("local forage active")
+            if(value !== null){
+                this.setState({apiResponse : value});
+            }
+            else{
+                const options = {
+                    url: `https://api.schooldigger.com/v1.2/schools?st=CA&appID=${process.env.REACT_APP_AppID}&appKey=${process.env.REACT_APP_APIKey}`,
+                    method: "GET",
+                    header: {
+                        accept: "application/json"
+                    }
+                };
+                axios(options)
+                    .then(response => {
+                        localforage.setItem('api_response',response.data.schoolList).then((value)=>{
+                            this.setState({apiResponse : value});
+                        });
                     })
-                }
+                    .catch(err => {
+                        console.log("error : ", err, "api : ", process.env.APIKey);
+                    });
+            }
+        })
+
+        
+            
+        
+    }
+
+    render() {
+        return (
+            <Fragment>
+                {/**
+                 * @param item the indiviual school generated from the API
+                 */}
+                
+                {this.state.apiResponse.map((item, index) => {
+                    return (
+                            <li key={item.schoolid}>
+                                <Link to = '/component/SchoolDetails' className="each-school" >
+                                    <SchoolTemplate item={item} />
+                                </Link> 
+                            </li>
+
+                    );
+                })}
+                
+                
             </Fragment>
         );
     }

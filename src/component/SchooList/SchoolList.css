@@ -6,11 +6,14 @@
     align-items: center;
     margin: auto;
     margin-bottom: 3em;
-    background: linear-gradient(to left, rgb(156, 108, 19),rgb(245, 162, 7));
+    background: linear-gradient(to left, rgb(250, 76, 76), rgb(250, 79, 79));
     border-radius: 10px;
     padding: 10px 0 10px 0;
     text-decoration: none;
     color: rgba(255,255,255);
+}
+.each-school:hover{
+    cursor: pointer;
 }
 .each-school__image{
     width : 200px;
@@ -19,6 +22,7 @@
 .each-school__description{
     display: flex;
     flex-direction: column;
+    width: 50%;
 }
 @media screen and (min-width : 800px){
     .each-school{

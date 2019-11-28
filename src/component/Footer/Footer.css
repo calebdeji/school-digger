@@ -1,0 +1,16 @@
+.footer{
+    width : 100%;
+    text-align:center;
+    height: 60px;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer__text{
+    margin: 0;
+}
+.portfolio-link{
+    /* text-decoration: none; */
+    color: rgba(255,255,255);
+}
