@@ -1,0 +1,28 @@
+.school_details--text-image{
+    display : grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+    padding : 40px 20px 40px 20px;
+    align-content: center;
+}
+.school__details{
+    padding-left : 10px;
+    padding-right: 10px;
+}
+.school__details-address{
+    display: grid;
+    grid-template-rows: auto;
+    row-gap: 10px;
+}
+@media screen and (max-width : 800px){
+    .school_details--text-image{
+        grid-template-rows: auto auto;
+        grid-template-columns: none;
+        justify-content: center;
+        row-gap: 20px;
+    }
+    .school__image--mod{
+        display: grid;
+        justify-content: center;
+    }
+}
