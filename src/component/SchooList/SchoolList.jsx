@@ -2,10 +2,9 @@ import React, { Component, Fragment } from "react";
 import axios from 'axios'
 import { Link } from "react-router-dom";
 import SchoolTemplate from "./SchoolTemplate";
-import { apiResponse } from "../../redux/actions/Actions";
+import { apiResponse, currentLink } from "../../redux/actions/Actions";
 import { connect } from "react-redux";
 import "./SchoolList.css";
-import { promised } from "q";
 
 export class SchoolList extends Component {
     constructor(props) {
@@ -36,7 +35,10 @@ export class SchoolList extends Component {
             console.log("props : ", this.props)
         })
     }
-    handleSchoolClick = schoolId => {};
+    handleSchoolClick = schoolId => {
+        console.log("handle seen")
+        this.props.currentLink(schoolId);
+    };
 
     render() {
         return (
@@ -44,12 +46,21 @@ export class SchoolList extends Component {
                 {/**
                  * @param item the indiviual school generated from the API
                  */}
+                {
+                    this.props.apiObjectResponse.ReducerAPI.apiObjectResponse.length !== 0 && this.props.apiObjectResponse.ReducerAPI.apiObjectResponse.map((item,index)=>{
+                        return (
+                            <li key={item.schoolid}>
+                                <Link to = '/component/SchoolDetails' className="each-school" onClick={ ()=>{
+                                    this.handleSchoolClick(item);
+                                } }>
+                                    <SchoolTemplate item={item} />
+                                </Link> 
+                            </li>
 
-                 {
-                     this.props.apiObjectResponse.map((item,index)=>{
-                         
-                     })
-                 }
+                        );
+                    })
+                }
+                 
                 
                 
             </Fragment>
@@ -60,5 +71,5 @@ export class SchoolList extends Component {
 const mapStateToProps = (state)=>{
     return { apiObjectResponse : state };
 }
-const mapDispatchToProps = { apiResponses : apiResponse }
+const mapDispatchToProps = { apiResponses : apiResponse, currentLink : currentLink }
 export default connect(mapStateToProps, mapDispatchToProps)(SchoolList);
