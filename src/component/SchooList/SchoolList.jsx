@@ -44,7 +44,7 @@ export class SchoolList extends Component {
                     this.props.apiObjectResponse.ReducerAPI.apiObjectResponse.map(
                         (item, index) => {
                             return (
-                                <li key={item.schoolid}>
+                                <li key={item.schoolid} className="list">
                                     <Link
                                         to="/component/SchoolDetails"
                                         className="each-school"

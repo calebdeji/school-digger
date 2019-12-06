@@ -1,4 +1,4 @@
-.each-school{
+.each-school {
     display: flex;
     flex-direction: row;
     height: min-content;
@@ -10,22 +10,25 @@
     border-radius: 10px;
     padding: 10px 0 10px 0;
     text-decoration: none;
-    color: rgba(255,255,255);
+    color: rgba(255, 255, 255);
 }
-.each-school:hover{
+.each-school:hover {
     cursor: pointer;
 }
-.each-school__image{
-    width : 200px;
+.each-school__image {
+    width: 200px;
     object-fit: cover;
 }
-.each-school__description{
+.each-school__description {
     display: flex;
     flex-direction: column;
     width: 50%;
 }
-@media screen and (min-width : 800px){
-    .each-school{
+.list {
+    list-style-type: none;
+}
+@media screen and (min-width: 800px) {
+    .each-school {
         width: 70%;
     }
 }
