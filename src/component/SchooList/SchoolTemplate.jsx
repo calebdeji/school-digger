@@ -16,15 +16,12 @@ export default class SchoolTemplate extends Component {
                 />
                 <div className="each-school__description">
                     <p className="each-school__name">
-                        {" "}
-                        {this.props.item.schoolName}{" "}
+                        {this.props.item.schoolName}
                     </p>
                     <p className="each-school__address">
-                        {" "}
-                        {this.props.item.address.html}{" "}
+                        {this.props.item.address.html}
                     </p>
                     <p className="each-school__level">
-                        {" "}
                         {this.props.item.schoolLevel} Level
                     </p>
                 </div>

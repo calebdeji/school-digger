@@ -1,63 +1,68 @@
-.action-field{
+.action-field {
     display: flex;
     margin: 15px 0 15px 0;
     width: 100%;
 }
 
-.form{
+.form {
     height: min-content;
     margin: auto;
     display: flex;
+    justify-content: space-between;
 }
-.form__search-field, .form__search-button{
-    padding : 3px;
+.form__formcontrol {
+    width: 40%;
 }
-.form__search-field{
-    width: 80%;
-    border : solid thin;
+.form__search-field,
+.form__search-button {
+    padding: 3px;
+}
+.form__search-field {
+    width: 50%;
+    border: solid thin;
     border-right-style: none;
-    border-color: rgba(0,0,0);
-    border-top-left-radius:10px ;
+    border-color: rgba(0, 0, 0);
+    border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding-left: 5px;
-    
+    margin-left: 1em;
+    outline: none;
 }
-.form__search-button{
+.form__search-button {
     border: solid thin;
-    background:transparent;
-    border-left-style:none ;
+    background: transparent;
+    border-left-style: none;
     color: var(--primary-color);
-    border-color: rgba(0,0,0);
+    border-color: rgba(0, 0, 0);
     font-size: 25px;
     transition: 0.4s;
-    border-top-right-radius:10px ;
+    border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     outline: none;
     width: 20%;
 }
-.form__search-button:hover{
+.form__search-button:hover {
     cursor: pointer;
     background-color: var(--primary-color);
-    color: rgba(255,255,255);
+    color: rgba(255, 255, 255);
     padding-left: 7px;
     padding-right: 7px;
 }
 
-@media screen and (min-width:800px){
-    .form{
-        width : 50%;
+@media screen and (min-width: 800px) {
+    .form {
+        width: 80%;
     }
 }
-@media screen and (max-width : 799px){
-    .form{
-        width : 70%;
+@media screen and (max-width: 799px) {
+    .form {
+        width: 70%;
     }
 }
-@media screen and (max-width : 500px){
-    .form{
-        width : 90%;
+@media screen and (max-width: 500px) {
+    .form {
+        width: 90%;
     }
 }
-@media screen and (max-width : 300px){
-    
+@media screen and (max-width: 300px) {
 }

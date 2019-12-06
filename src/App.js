@@ -52,7 +52,6 @@ export default class App extends Component{
     handleBarClick = (event) =>{
 
         event.preventDefault();
-        console.log("state status is : ", this.state);
         if(this.state.navText){
             this.setState( ( state ) => ({
                 navText : !state.navText,
