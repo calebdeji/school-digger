@@ -16,7 +16,11 @@ export class Actions extends Component {
     constructor(props) {
         super(props);
         this.props = props;
-        this.state = { searchText: "", stateSelected: "Alabama" };
+        this.state = {
+            searchText: "",
+            stateSelected: "Alabama",
+            progressLoading: ""
+        };
     }
 
     handleChange = event => {
@@ -46,20 +50,51 @@ export class Actions extends Component {
                 method: "GET",
                 header: {
                     accept: "application/json"
+                },
+                onDownloadProgress: progressEvent => {
+                    let percentCompleted = Math.floor(
+                        (progressEvent.loaded * 100) / progressEvent.total
+                    );
+                    console.log("precent : ", percentCompleted);
+                    this.setState({ progressLoading: percentCompleted });
+                    if (percentCompleted === 100) {
+                        console.log("precent 100 : ", percentCompleted);
+
+                        setTimeout(() => {
+                            this.setState({ progressLoading: 0 });
+                        }, 1000);
+                    }
                 }
             };
             const response = await axios(options);
+            console.log(
+                "response : search",
+                response,
+                "state abbreviations : ",
+                stateabbreviations
+            );
             return response;
         };
-        apiValue().then(value => {
-            this.props.apiResponses(value.data.schoolList);
-        });
+        apiValue()
+            .then(value => {
+                this.props.apiResponses(value.data.schoolList);
+            })
+            .catch(err => {
+                console.log("error while searching : ", err);
+                this.props.apiResponses([]);
+            });
     };
 
     render() {
         // const classes = useStyles();
         return (
             <div className="action-field">
+                <span
+                    className="progress__load"
+                    style={{
+                        width: this.state.progressLoading.toString().concat("%")
+                    }}
+                ></span>
                 <form action="#" onSubmit={this.handleSearch} className="form">
                     <FormControl variant="filled" className="form__formcontrol">
                         <InputLabel id="demo-simple-select-outlined-label">

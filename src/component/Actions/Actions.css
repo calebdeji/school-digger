@@ -1,9 +1,16 @@
 .action-field {
     display: flex;
-    margin: 15px 0 15px 0;
+    margin: 0px 0 15px 0;
     width: 100%;
+    flex-direction: column;
 }
-
+.progress__load {
+    display: block;
+    height: 10px;
+    background-color: rgb(250, 76, 76);
+    width: 0%;
+    transition: 0.4s;
+}
 .form {
     height: min-content;
     margin: auto;
