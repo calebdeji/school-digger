@@ -19,6 +19,9 @@ export class SchoolList extends Component {
                 method: "GET",
                 header: {
                     accept: "application/json"
+                },
+                onUploadProgress: p => {
+                    console.log("sending request progress : ", p);
                 }
             };
             const response = await axios(options);
