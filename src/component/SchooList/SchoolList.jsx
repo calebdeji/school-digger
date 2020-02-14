@@ -13,23 +13,30 @@ export class SchoolList extends Component {
     }
 
     componentDidMount() {
-        const apiValue = async () => {
-            const options = {
-                url: `https://api.schooldigger.com/v1.2/schools?st=CA&appID=${process.env.REACT_APP_AppID}&appKey=${process.env.REACT_APP_APIKey}`,
-                method: "GET",
-                header: {
-                    accept: "application/json"
-                },
-                onUploadProgress: p => {
-                    console.log("sending request progress : ", p);
-                }
+        if (
+            this.props.apiObjectResponse.ReducerAPI.apiObjectResponse.length !==
+            0
+        ) {
+            console.log("Not equal to 0");
+        } else {
+            const apiValue = async () => {
+                const options = {
+                    url: `https://api.schooldigger.com/v1.2/schools?st=CA&appID=${process.env.REACT_APP_AppID}&appKey=${process.env.REACT_APP_APIKey}`,
+                    method: "GET",
+                    header: {
+                        accept: "application/json"
+                    },
+                    onUploadProgress: p => {
+                        console.log("sending request progress : ", p);
+                    }
+                };
+                const response = await axios(options);
+                return response;
             };
-            const response = await axios(options);
-            return response;
-        };
-        apiValue().then(value => {
-            this.props.apiResponses(value.data.schoolList);
-        });
+            apiValue().then(value => {
+                this.props.apiResponses(value.data.schoolList);
+            });
+        }
     }
     handleSchoolClick = schoolId => {
         console.log("handle seen");
@@ -47,10 +54,10 @@ export class SchoolList extends Component {
                     this.props.apiObjectResponse.ReducerAPI.apiObjectResponse.map(
                         (item, index) => {
                             return (
-                                <li key={item.schoolid} className="list">
+                                <li key={item.schoolid} className='list'>
                                     <Link
-                                        to="/component/SchoolDetails"
-                                        className="each-school"
+                                        to='/component/SchoolDetails'
+                                        className='each-school'
                                         onClick={() => {
                                             this.handleSchoolClick(item);
                                         }}
