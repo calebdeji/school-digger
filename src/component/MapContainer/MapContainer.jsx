@@ -6,10 +6,6 @@ export class MapContainer extends Component {
         super(props);
         this.props = props;
     }
-    componentDidMount() {
-        console.log("props for map is : ", this.props);
-        console.log("api key is ", process.env.REACT_APP_GoogleAPIKey);
-    }
     render() {
         return (
             <Map
