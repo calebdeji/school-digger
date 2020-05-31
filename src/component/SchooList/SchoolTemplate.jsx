@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import MarkDown from "react-markdown";
 import dummyImage from "../../logo.png";
 
 export default class SchoolTemplate extends Component {
@@ -7,23 +8,18 @@ export default class SchoolTemplate extends Component {
         this.props = props;
     }
     render() {
+        const {
+            schoolName,
+            schoolLevel,
+            address: { html },
+        } = this.props.item;
         return (
             <Fragment>
-                <img
-                    src={dummyImage}
-                    alt="A dummy figure"
-                    className="each-school__image"
-                />
-                <div className="each-school__description">
-                    <p className="each-school__name">
-                        {this.props.item.schoolName}
-                    </p>
-                    <p className="each-school__address">
-                        {this.props.item.address.html}
-                    </p>
-                    <p className="each-school__level">
-                        {this.props.item.schoolLevel} Level
-                    </p>
+                <img src={dummyImage} alt='A dummy figure' className='each-school__image' />
+                <div className='each-school__description'>
+                    <MarkDown source={schoolName} className='each-school__name' />
+                    <p className='each-school__address'>{html}</p>
+                    <p className='each-school__level'>{schoolLevel} Level</p>
                 </div>
             </Fragment>
         );
