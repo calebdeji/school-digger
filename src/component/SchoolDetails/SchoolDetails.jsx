@@ -52,10 +52,13 @@ export class SchoolDetails extends Component {
                                     </div>
                                 </div>
                             </li>
-                            <MapContainer
-                                lat={individualSchool.address.latLong.latitude}
-                                lng={individualSchool.address.latLong.longitude}
-                            />
+                            {/* when the api calls exceed the normal limit, no lat or long will be returned */}
+                            {individualSchool.address.latLong && (
+                                <MapContainer
+                                    lat={individualSchool.address.latLong.latitude}
+                                    lng={individualSchool.address.latLong.longitude}
+                                />
+                            )}
                         </Fragment>
                     ) : (
                         <p>No school selected</p>
